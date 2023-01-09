@@ -13,17 +13,17 @@ namespace La_Mia_Pizzeria_1 {
 	public class PizzaController : Controller {
 		// GET: /<controller>/
 		public IActionResult Index () {
-			List<Pizza> listaDellePizze = PizzaData.GetPosts ();
+			List<Pizza> listaDellePizze = PizzaData.GetPizza ();
 
 			return View ("Index", listaDellePizze);
 		}
 
 		public IActionResult Details (int id) {
-			List<Pizza> listaDellePizze = PizzaData.GetPosts ();
+			List<Pizza> listaDellePizze = PizzaData.GetPizza ();
 
-			foreach (Pizza post in listaDellePizze) {
-				if (post.Id == id) {
-					return View (post);
+			foreach (Pizza pizza in listaDellePizze) {
+				if (pizza.Id == id) {
+					return View (pizza);
 				}
 			}
 
