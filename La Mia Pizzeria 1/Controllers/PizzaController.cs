@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using La_Mia_Pizzeria_1.Database;
 using La_Mia_Pizzeria_1.Models;
 using La_Mia_Pizzeria_1.Utils;
 using Microsoft.AspNetCore.Mvc;
@@ -13,25 +14,49 @@ namespace La_Mia_Pizzeria_1 {
 	public class PizzaController : Controller {
 		// GET: /<controller>/
 		public IActionResult Index () {
-			List<Pizza> listaDellePizze = PizzaData.GetPizza ();
-
-			return View ("Index", listaDellePizze);
+			using (PizzaContext db = new PizzaContext ()) {
+				List<Pizza> listaPizze = db.pizzas.ToList<Pizza> ();
+				return View ("Index", listaPizze);
+			}
 		}
 
 		public IActionResult Details (int id) {
-			List<Pizza> listaDellePizze = PizzaData.GetPizza ();
+			using (PizzaContext db = new PizzaContext ()) {
+				// LINQ: syntax methods
+				Pizza pizzaTrovata = db.pizzas
+					.Where (SingolaPizza => SingolaPizza.Id == id)
+					.FirstOrDefault ();
 
-			foreach (Pizza pizza in listaDellePizze) {
-				if (pizza.Id == id) {
-					return View (pizza);
+				if (pizzaTrovata != null) {
+					return View (pizzaTrovata);
 				}
-			}
 
-			return NotFound ("La pizza con l'id cercato non esiste!");
+				return NotFound ("La pizza con l'id cercato non esiste!");
+			}
 		}
 
 		public IActionResult Esempio (string nome, string cognome, int eta) {
 			return Ok ("Hai inserito il parametro nome: " + nome + ", il parametro cognome: " + cognome + ", il parametro eta: " + eta);
+		}
+
+		[HttpGet]
+		public IActionResult Create () {
+			return View ("Create");
+		}
+
+		[HttpPost]
+		[ValidateAntiForgeryToken]
+		public IActionResult Create (Pizza formData) {
+			if (!ModelState.IsValid) {
+				return View ("Create", formData);
+			}
+
+			using (PizzaContext db = new PizzaContext ()) {
+				db.pizzas.Add (formData);
+				db.SaveChanges ();
+			}
+
+			return RedirectToAction ("Index");
 		}
 	}
 }
