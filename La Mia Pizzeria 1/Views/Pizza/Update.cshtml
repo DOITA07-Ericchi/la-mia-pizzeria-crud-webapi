@@ -5,28 +5,28 @@
         @Html.AntiForgeryToken()
         <div class="mb-3">
             <label>Id:</label>
-            <input asp-for="Id" type="text" class="form-control" disabled />
+            <input asp-for="Id" type="text" class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" disabled />
         </div>
         <div class="mb-3">
             <label>Titolo:</label>
-            <input asp-for="Title" type="text" class="form-control" />
+            <input asp-for="Title" type="text" class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" />
             <span asp-validation-for="Title" class="text-danger"></span>
         </div>
         <div class="mb-3">
             <label>Descrizione:</label>
-            <textarea asp-for="Description" rows="10" class="d-block w-100"></textarea>
+            <textarea asp-for="Description" rows="10" class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"></textarea>
             <span asp-validation-for="Description" class="text-danger"></span>
         </div>
         <div class="mb-3">
             <label>Prezzo:</label>
-            <input asp-for="Price" rows="10" class="form-control"></input>
+            <input asp-for="Price" rows="10" class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"></input>
             <span asp-validation-for="Price" class="text-danger"></span>
         </div>
         <div class="mb-3 form-check">
             <label>Immagine:</label>
-            <input asp-for="Image" type="text" class="form-control" />
+            <input asp-for="Image" type="text" class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" />
             <span asp-validation-for="Image" class="text-danger"></span>
         </div>
-        <button type="submit" class="btn btn-primary">Salva Modifiche alla pizza</button>
+        <button type="submit" class="inline-block px-6 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out">Salva Modifiche alla pizza</button>
     </form>
 </div>

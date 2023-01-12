@@ -57,6 +57,76 @@ namespace La_Mia_Pizzeria_1 {
 
 			return RedirectToAction ("Index");
 		}
+
+		        [HttpGet]
+        public IActionResult Update(int id)
+        {
+            using(PizzaContext db = new PizzaContext())
+            {
+                Pizza pizzaDaCambiare = db.pizzas.Where(pizzona => pizzona.Id == id).FirstOrDefault();
+
+                if(pizzaDaCambiare == null)
+                {
+                    return NotFound("La pizza non è stata trovato");
+                }
+
+                return View("Update", pizzaDaCambiare);
+            }
+  
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Update(Pizza formData)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View("Update", formData);
+            }
+
+            using (PizzaContext db = new PizzaContext())
+            {
+                Pizza pizzaDaCambiare = db.pizzas.Where(pizzona => pizzona.Id == formData.Id).FirstOrDefault();
+
+                if (pizzaDaCambiare != null)
+                {
+                    pizzaDaCambiare.Title = formData.Title;
+                    pizzaDaCambiare.Description = formData.Description;
+                    pizzaDaCambiare.Price = formData.Price;
+                    pizzaDaCambiare.Image = formData.Image;
+
+                    db.SaveChanges();
+
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    return NotFound("La pizza che volevi modificare non è stata trovata!");
+                }
+            }
+   
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Delete(int id)
+        {
+            using(PizzaContext db = new PizzaContext())
+            {
+                Pizza pizzaDaDeletare = db.pizzas.Where(pizzona => pizzona.Id == id).FirstOrDefault();
+
+                if(pizzaDaDeletare != null)
+                {
+                    db.pizzas.Remove(pizzaDaDeletare);
+                    db.SaveChanges();
+
+                    return RedirectToAction("Index");
+                } else
+                {
+                    return NotFound("La pizza da eliminare non è stata trovata!");
+                }
+            }
+        }
 	}
 }
 
