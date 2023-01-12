@@ -7,7 +7,7 @@ namespace La_Mia_Pizzeria_1.Models {
 	public class Pizza {
 		public int Id { get; set; }
 		[Column (TypeName = "varchar(128)")]
-		[StringLength(50, ErrorMessage="Il campo titolo non può contenere più di 50 caratteri")]
+		[StringLength(128, ErrorMessage="Il campo titolo non può contenere più di 128 caratteri")]
 		public string Title { get; set; }
 		[Column (TypeName = "text")]
 		public string Description { get; set; }
@@ -30,4 +30,3 @@ namespace La_Mia_Pizzeria_1.Models {
 		}
 	}
 }
-
