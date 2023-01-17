@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LaMiaPizzeria1.Migrations
 {
     [DbContext(typeof(PizzaContext))]
-    [Migration("20230110145154_PrimaMigration")]
-    partial class PrimaMigration
+    [Migration("20230117161518_AddedVariants3")]
+    partial class AddedVariants3
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -38,6 +38,7 @@ namespace LaMiaPizzeria1.Migrations
 
                     b.Property<string>("Image")
                         .IsRequired()
+                        .HasMaxLength(512)
                         .HasColumnType("varchar(512)");
 
                     b.Property<decimal>("Price")
@@ -45,11 +46,50 @@ namespace LaMiaPizzeria1.Migrations
 
                     b.Property<string>("Title")
                         .IsRequired()
+                        .HasMaxLength(128)
                         .HasColumnType("varchar(128)");
+
+                    b.Property<int>("VariantId")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
+                    b.HasIndex("VariantId");
+
                     b.ToTable("pizzas");
+                });
+
+            modelBuilder.Entity("La_Mia_Pizzeria_1.Models.Variant", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("variants");
+                });
+
+            modelBuilder.Entity("La_Mia_Pizzeria_1.Models.Pizza", b =>
+                {
+                    b.HasOne("La_Mia_Pizzeria_1.Models.Variant", "Variant")
+                        .WithMany("Pizzas")
+                        .HasForeignKey("VariantId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Variant");
+                });
+
+            modelBuilder.Entity("La_Mia_Pizzeria_1.Models.Variant", b =>
+                {
+                    b.Navigation("Pizzas");
                 });
 #pragma warning restore 612, 618
         }
