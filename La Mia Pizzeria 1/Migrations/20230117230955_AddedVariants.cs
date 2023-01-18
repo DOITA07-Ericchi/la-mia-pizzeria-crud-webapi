@@ -11,7 +11,7 @@ namespace LaMiaPizzeria1.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Variant",
+                name: "variants",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -20,7 +20,7 @@ namespace LaMiaPizzeria1.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Variant", x => x.Id);
+                    table.PrimaryKey("PK_variants", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -39,9 +39,9 @@ namespace LaMiaPizzeria1.Migrations
                 {
                     table.PrimaryKey("PK_pizzas", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_pizzas_Variant_VariantId",
+                        name: "FK_pizzas_variants_VariantId",
                         column: x => x.VariantId,
-                        principalTable: "Variant",
+                        principalTable: "variants",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -59,7 +59,7 @@ namespace LaMiaPizzeria1.Migrations
                 name: "pizzas");
 
             migrationBuilder.DropTable(
-                name: "Variant");
+                name: "variants");
         }
     }
 }

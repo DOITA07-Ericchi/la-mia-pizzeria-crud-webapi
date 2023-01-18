@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LaMiaPizzeria1.Migrations
 {
     [DbContext(typeof(PizzaContext))]
-    [Migration("20230117161518_AddedVariants3")]
-    partial class AddedVariants3
+    [Migration("20230117230955_AddedVariants")]
+    partial class AddedVariants
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

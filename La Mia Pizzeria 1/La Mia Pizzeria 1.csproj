@@ -14,6 +14,7 @@
     <None Remove="Microsoft.EntityFrameworkCore.SqlServer" />
     <None Remove="Microsoft.EntityFrameworkCore.Design" />
     <None Remove="Database\" />
+    <None Remove="Migrations\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="6.0.12" />
@@ -27,5 +28,6 @@
     <Folder Include="Utils\" />
     <Folder Include="Views\Pizza\" />
     <Folder Include="Database\" />
+    <Folder Include="Migrations\" />
   </ItemGroup>
 </Project>
