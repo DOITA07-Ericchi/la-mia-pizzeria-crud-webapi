@@ -18,10 +18,10 @@ namespace La_Mia_Pizzeria_1.Controllers.Api {
 		[HttpGet]
 		public IActionResult Get () {
 			using (PizzaContext db = new PizzaContext()) {
-				List<Pizza> articoli = db.pizzas
+				List<Pizza> pizze = db.pizzas
 					// .Include(pizzona => pizzona.Tags) // Non ho fatto i tag...
 					.ToList<Pizza>();
-				return Ok(articoli);
+				return Ok(pizze);
 			}
 		}
 	}
