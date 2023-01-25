@@ -4,10 +4,8 @@ using Microsoft.EntityFrameworkCore;
 using La_Mia_Pizzeria_1.Areas.Identity.Data;
 
 var builder = WebApplication.CreateBuilder (args);
-var connectionString = builder.Configuration.GetConnectionString("BlogContextConnection") ?? throw new InvalidOperationException("Connection string 'BlogContextConnection' not found.");
 
-builder.Services.AddDbContext<BlogContext>(options =>
-    options.UseSqlServer(connectionString));
+builder.Services.AddDbContext<BlogContext>();
 
 builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
     .AddEntityFrameworkStores<BlogContext>();
@@ -43,6 +41,8 @@ app.UseAuthorization ();
 app.MapControllerRoute (
 	name: "default",
 	pattern: "{controller=Pizza}/{action=Index}/{id?}");
+
+app.MapRazorPages();
 
 app.Run ();
 
