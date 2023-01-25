@@ -1,6 +1,16 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+using La_Mia_Pizzeria_1.Database;
 
 var builder = WebApplication.CreateBuilder (args);
+var connectionString = builder.Configuration.GetConnectionString("PizzaContextConnection") ?? throw new InvalidOperationException("Connection string 'PizzaContextConnection' not found.");
+
+builder.Services.AddDbContext<PizzaContext>(options =>
+    options.UseSqlServer(connectionString));
+
+builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+    .AddEntityFrameworkStores<PizzaContext>();
 
 // Add services to the container.
 builder.Services.AddControllersWithViews ();
